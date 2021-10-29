@@ -36,6 +36,37 @@ async function run() {
             res.json(foods);
         });
 
+        // Get user from the database
+        app.post('/getuser', async (req, res) => {
+            const userCollection = db.collection('users');
+            const sentUser = req.body;
+            const collectedUser = await userCollection.findOne({
+                uid: sentUser.uid,
+            });
+            // Checking if the user exists or not
+            if (!collectedUser) {
+                const user = {
+                    uid: sentUser.uid,
+                    displayName: sentUser.displayName,
+                    photoURL: sentUser.photoURL,
+                    email: sentUser.email,
+                    emailVerified: sentUser.emailVerified,
+                    cart: {},
+                    orders: {},
+                    purchased: {},
+                };
+                const result = await userCollection.insertOne(user);
+                if (result.insertedId) {
+                    res.json(user);
+                } else {
+                    console.log(
+                        'Sorry, some error occurred while inserting user!'
+                    );
+                }
+            } else {
+                res.json(collectedUser);
+            }
+        });
     } finally {
         // await client.close();
     }
