@@ -19,16 +19,23 @@ async function run() {
         await client.connect();
 
         const db = client.db('Foody');
-        const featureCollection = db.collection('features');
 
+        // Retrieving features from the database
         app.get('/features', async (req, res) => {
-            const cursor = await featureCollection.find({});
+            const featureCollection = db.collection('features');
+            const cursor = featureCollection.find({});
             const features = await cursor.toArray();
             res.json(features);
         });
+
+        // Retrieving foods from the database
         app.get('/foods', async (req, res) => {
-            res.json('Hitting the foods api');
+            const foodCollection = db.collection('foods');
+            const cursor = foodCollection.find({});
+            const foods = await cursor.toArray();
+            res.json(foods);
         });
+
     } finally {
         // await client.close();
     }
