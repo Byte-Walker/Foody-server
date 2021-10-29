@@ -1,0 +1,27 @@
+{
+  "name": "foody-server",
+  "version": "1.0.0",
+  "description": "Backend of the food delivery service of foody incorporation. ",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "start-dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/programming-hero-web-course1/tourism-or-delivery-website-server-side-Byte-Walker.git"
+  },
+  "author": "ByteWalker aka Md Shahidul Islam",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/programming-hero-web-course1/tourism-or-delivery-website-server-side-Byte-Walker/issues"
+  },
+  "homepage": "https://github.com/programming-hero-web-course1/tourism-or-delivery-website-server-side-Byte-Walker#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongodb": "^4.1.3"
+  }
+}
