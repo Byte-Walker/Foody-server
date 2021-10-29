@@ -44,7 +44,7 @@ async function run() {
                 uid: sentUser.uid,
             });
             // Checking if the user exists or not
-            if (!collectedUser) {
+            if (!collectedUser && sentUser.email) {
                 const user = {
                     uid: sentUser.uid,
                     displayName: sentUser.displayName,
