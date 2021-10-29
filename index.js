@@ -26,7 +26,9 @@ async function run() {
             const features = await cursor.toArray();
             res.json(features);
         });
-
+        app.get('/foods', async (req, res) => {
+            res.json('Hitting the foods api');
+        });
     } finally {
         // await client.close();
     }
