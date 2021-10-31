@@ -11,8 +11,6 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// const ObjectId = new ObjectId();
-
 // Mongodb setup
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.5pp73.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 const client = new MongoClient(uri);
@@ -21,7 +19,10 @@ async function run() {
     try {
         await client.connect();
 
+        // Getting the database
         const db = client.db('Foody');
+
+        // Getting the collections
         const featureCollection = db.collection('features');
         const foodCollection = db.collection('foods');
         const userCollection = db.collection('users');
@@ -99,12 +100,12 @@ async function run() {
             res.send(result);
         });
 
-        // Add new food 
+        // Add new food
         app.post('/addfood', async (req, res) => {
             const foodInfo = req.body;
             const result = await foodCollection.insertOne(foodInfo);
             res.json(result);
-        })
+        });
 
         // Get user from the database
         app.post('/getuser', async (req, res) => {
@@ -147,6 +148,7 @@ app.get('/', (req, res) => {
     res.send('Hitting the homepage url');
 });
 
+// Listening to the port
 app.listen(port, () => {
     console.log('listening on port ' + port);
 });
